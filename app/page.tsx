@@ -253,7 +253,7 @@ export default function Home() {
       },
       links: {
         github: "https://github.com/daminduAb/AS-techno.git",
-        demo: "https://as-techno.vercel.app/"
+        demo: "https://rk-mobile-lk.vercel.app/"
       }
     },
     {
