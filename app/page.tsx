@@ -729,7 +729,7 @@ export default function Home() {
             </div>
 
             {/* Writings & Blogs Section */}
-            <div className="mb-16 w-full text-left">
+            {/* <div className="mb-16 w-full text-left">
   <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
     Writings & Blogs
   </h2>
@@ -745,7 +745,7 @@ export default function Home() {
     </a>
     . I prefer using an established platform rather than building a separate website so I can focus on what really matters: discussing technology, AI, full-stack development, and real-world project experiences.
   </p>
-</div>
+</div> */}
 
             <div className="mb-20 w-full">
       
@@ -755,7 +755,7 @@ export default function Home() {
       </h2>
 
       {/* Certificate Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
         {certificates.map((cert, index) => (
           <motion.div
@@ -786,7 +786,7 @@ export default function Home() {
           </motion.div>
         ))}
 
-      </div>
+      </div> */}
 
       {/* Modal */}
       <AnimatePresence>
