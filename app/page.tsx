@@ -47,7 +47,8 @@ import {
   FiExternalLink,
   FiShoppingCart,
   FiX,
-  FiMaximize2
+  FiMaximize2,
+  FiMessageCircle
 } from "react-icons/fi";
 
 import {
@@ -60,7 +61,12 @@ import {
   SiEthereum,
   SiSupabase,
   SiStripe,
-  SiMysql
+  SiMysql,
+  SiPython,
+  SiFastapi,
+  SiOpenai,
+ 
+
 } from "react-icons/si";
 import { h1 } from "framer-motion/client";
 
@@ -164,34 +170,34 @@ export default function Home() {
   }, []);
 
 //cetificates
-    const [selected, setSelected] = useState<any>(null);
-    const certificates = [
-  {
-    title: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    image: "/certificates/aws.jpg",
-  },
-  {
-    title: "Blockchain Development",
-    issuer: "Coursera",
-    image: "/certificates/blockchain.jpg",
-  },
-  {
-    title: "AI & Machine Learning",
-    issuer: "Google",
-    image: "/certificates/ai.jpg",
-  },
-  {
-    title: "DevOps Engineering",
-    issuer: "Udemy",
-    image: "/certificates/devops.jpg",
-  },
-  {
-    title: "Cyber Security",
-    issuer: "Cisco",
-    image: "/certificates/cybersecurity.jpg",
-  },
-];
+//     const [selected, setSelected] = useState<any>(null);
+//     const certificates = [
+//   {
+//     title: "AWS Cloud Practitioner",
+//     issuer: "Amazon Web Services",
+//     image: "/certificates/aws.jpg",
+//   },
+//   {
+//     title: "Blockchain Development",
+//     issuer: "Coursera",
+//     image: "/certificates/blockchain.jpg",
+//   },
+//   {
+//     title: "AI & Machine Learning",
+//     issuer: "Google",
+//     image: "/certificates/ai.jpg",
+//   },
+//   {
+//     title: "DevOps Engineering",
+//     issuer: "Udemy",
+//     image: "/certificates/devops.jpg",
+//   },
+//   {
+//     title: "Cyber Security",
+//     issuer: "Cisco",
+//     image: "/certificates/cybersecurity.jpg",
+//   },
+// ];
 
   
 
@@ -283,7 +289,36 @@ export default function Home() {
         github: " https://lnkd.in/gY3P_ZbT",
         demo: "https://lnkd.in/g87efjCQ"
       }
-    }
+    },
+     {
+  id: 4,
+  title: "WhatsApp AI Shop Agent",
+  shortDesc: "Intelligent shopping assistant on WhatsApp",
+  fullDesc: "A fully AI-powered WhatsApp chatbot for online shops. Customers can search products, check availability, place orders, and get instant replies in any language — all through WhatsApp chat. Built with vector search for smart product matching, conversation memory, product image support, and real-time MongoDB product management. Uses Meta Cloud API for production-grade WhatsApp messaging.",
+  tech: ["Python", "FastAPI", "MongoDB", "Pinecone", "Groq AI"],
+  techIcons: {
+    "Python": <SiPython className="text-yellow-400" />,
+    "FastAPI": <SiFastapi className="text-teal-400" />,
+   // "MongoDB": <SiMongodb className="text-green-500" />,
+   // "Pinecone": <SiPinecone className="text-blue-500" />,
+    "Groq AI": <SiOpenai className="text-purple-400" />
+  },
+  category: "ai",
+  gradient: "",
+  icon: <FiMessageCircle className="w-6 h-6" />,
+  mediaType: "video",
+  mediaUrl: "/whatsapp-bot.mp4",
+  thumbnail: "/whatsapp-thumb.jpg",
+  stats: {
+    products: "100K+",
+    languages: "10+",
+    response: "<5s"
+  },
+  links: {
+    github: "https://github.com/daminduAb/AI-WhatsApp-shopping-agent-.git",
+    demo: "#"
+  }
+}
   ];
 
   const containerVariants = {
@@ -749,47 +784,10 @@ export default function Home() {
 
             <div className="mb-20 w-full">
       
-      {/* Title */}
-      <h2 className="mb-10 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-        Certificates
-      </h2>
-
-      {/* Certificate Grid */}
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        {certificates.map((cert, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.05, y: -5 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            onClick={() => setSelected(cert)}
-            className="cursor-pointer rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/40 dark:bg-white/5 backdrop-blur-lg p-4 shadow-md hover:shadow-xl transition"
-          >
-            
-            {/* Image */}
-            <div className="overflow-hidden rounded-xl">
-              <img
-                src={cert.image}
-                alt={cert.title}
-                className="h-40 w-full object-cover transition duration-500 hover:scale-110"
-              />
-            </div>
-
-            {/* Text */}
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold text-black dark:text-white">
-                {cert.title}
-              </h3>
-              <p className="text-xs text-gray-400">{cert.issuer}</p>
-            </div>
-
-          </motion.div>
-        ))}
-
-      </div> */}
+     
 
       {/* Modal */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {selected && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6"
@@ -827,7 +825,7 @@ export default function Home() {
 
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
     </div>
 
@@ -990,14 +988,14 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
         >
           <FaXTwitter className="h-5 w-5" />
         </a>
-        <a
+        {/* <a
           href="#"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
         >
           <Youtube className="h-5 w-5" />
-        </a>
+        </a> */}
         <a
           href="https://discord.com/channels/@me/948819673997262879"
           target="_blank"
