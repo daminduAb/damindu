@@ -12,6 +12,8 @@ const images = [
   "/casual8.jpg",
   "/casual9.jpg",
   "/casual10.jpg",
+  "/casual11.jpg",
+  "/casual12.jpg",
 ]
 
 import Image from "next/image";
