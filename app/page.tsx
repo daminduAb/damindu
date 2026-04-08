@@ -42,6 +42,8 @@ import { ThemeToggle } from "./components/ThemeToggle";
 
 import { motion, AnimatePresence } from "framer-motion";
 
+import { PortfolioChatbot } from "./components/PortfolioChatbot";
+
 import {
   FiGithub,
   FiExternalLink,
@@ -65,7 +67,7 @@ import {
   SiPython,
   SiFastapi,
   SiOpenai,
- 
+
 
 } from "react-icons/si";
 import { h1 } from "framer-motion/client";
@@ -169,37 +171,37 @@ export default function Home() {
     }));
   }, []);
 
-//cetificates
-//     const [selected, setSelected] = useState<any>(null);
-//     const certificates = [
-//   {
-//     title: "AWS Cloud Practitioner",
-//     issuer: "Amazon Web Services",
-//     image: "/certificates/aws.jpg",
-//   },
-//   {
-//     title: "Blockchain Development",
-//     issuer: "Coursera",
-//     image: "/certificates/blockchain.jpg",
-//   },
-//   {
-//     title: "AI & Machine Learning",
-//     issuer: "Google",
-//     image: "/certificates/ai.jpg",
-//   },
-//   {
-//     title: "DevOps Engineering",
-//     issuer: "Udemy",
-//     image: "/certificates/devops.jpg",
-//   },
-//   {
-//     title: "Cyber Security",
-//     issuer: "Cisco",
-//     image: "/certificates/cybersecurity.jpg",
-//   },
-// ];
+  //cetificates
+  //     const [selected, setSelected] = useState<any>(null);
+  //     const certificates = [
+  //   {
+  //     title: "AWS Cloud Practitioner",
+  //     issuer: "Amazon Web Services",
+  //     image: "/certificates/aws.jpg",
+  //   },
+  //   {
+  //     title: "Blockchain Development",
+  //     issuer: "Coursera",
+  //     image: "/certificates/blockchain.jpg",
+  //   },
+  //   {
+  //     title: "AI & Machine Learning",
+  //     issuer: "Google",
+  //     image: "/certificates/ai.jpg",
+  //   },
+  //   {
+  //     title: "DevOps Engineering",
+  //     issuer: "Udemy",
+  //     image: "/certificates/devops.jpg",
+  //   },
+  //   {
+  //     title: "Cyber Security",
+  //     issuer: "Cisco",
+  //     image: "/certificates/cybersecurity.jpg",
+  //   },
+  // ];
 
-  
+
 
   // Projects data
   const projectss: Project[] = [
@@ -267,7 +269,7 @@ export default function Home() {
       title: "Eco Green Platform",
       shortDesc: "Sustainability awareness system",
       fullDesc: "An innovative platform promoting environmental consciousness through gamification. Users earn rewards for eco-friendly actions, track their carbon footprint, and participate in community challenges. Features AI-powered recommendations for sustainable living.",
-      tech: ["React", "Node.js", "MongoDB","Mysql"],
+      tech: ["React", "Node.js", "MongoDB", "Mysql"],
       techIcons: {
         "React": <SiReact className="text-blue-400" />,
         "Node.js": <SiNodedotjs className="text-green-600" />,
@@ -290,35 +292,35 @@ export default function Home() {
         demo: "https://lnkd.in/g87efjCQ"
       }
     },
-     {
-  id: 4,
-  title: "WhatsApp AI Shop Agent",
-  shortDesc: "Intelligent shopping assistant on WhatsApp",
-  fullDesc: "A fully AI-powered WhatsApp chatbot for online shops. Customers can search products, check availability, place orders, and get instant replies in any language — all through WhatsApp chat. Built with vector search for smart product matching, conversation memory, product image support, and real-time MongoDB product management. Uses Meta Cloud API for production-grade WhatsApp messaging.",
-  tech: ["Python", "FastAPI", "MongoDB", "Pinecone", "Groq AI"],
-  techIcons: {
-    "Python": <SiPython className="text-yellow-400" />,
-    "FastAPI": <SiFastapi className="text-teal-400" />,
-   // "MongoDB": <SiMongodb className="text-green-500" />,
-   // "Pinecone": <SiPinecone className="text-blue-500" />,
-    "Groq AI": <SiOpenai className="text-purple-400" />
-  },
-  category: "ai",
-  gradient: "",
-  icon: <FiMessageCircle className="w-6 h-6" />,
-  mediaType: "video",
-  mediaUrl: "/whatsapp-bot.mp4",
-  thumbnail: "/whatsapp-thumb.jpg",
-  stats: {
-    products: "100K+",
-    languages: "10+",
-    response: "<5s"
-  },
-  links: {
-    github: "https://github.com/daminduAb/AI-WhatsApp-shopping-agent-.git",
-    demo: "#"
-  }
-}
+    {
+      id: 4,
+      title: "WhatsApp AI Shop Agent",
+      shortDesc: "Intelligent shopping assistant on WhatsApp",
+      fullDesc: "A fully AI-powered WhatsApp chatbot for online shops. Customers can search products, check availability, place orders, and get instant replies in any language — all through WhatsApp chat. Built with vector search for smart product matching, conversation memory, product image support, and real-time MongoDB product management. Uses Meta Cloud API for production-grade WhatsApp messaging.",
+      tech: ["Python", "FastAPI", "MongoDB", "Pinecone", "Groq AI"],
+      techIcons: {
+        "Python": <SiPython className="text-yellow-400" />,
+        "FastAPI": <SiFastapi className="text-teal-400" />,
+        // "MongoDB": <SiMongodb className="text-green-500" />,
+        // "Pinecone": <SiPinecone className="text-blue-500" />,
+        "Groq AI": <SiOpenai className="text-purple-400" />
+      },
+      category: "ai",
+      gradient: "",
+      icon: <FiMessageCircle className="w-6 h-6" />,
+      mediaType: "video",
+      mediaUrl: "/whatsapp-bot.mp4",
+      thumbnail: "/whatsapp-thumb.jpg",
+      stats: {
+        products: "100K+",
+        languages: "10+",
+        response: "<5s"
+      },
+      links: {
+        github: "https://github.com/daminduAb/AI-WhatsApp-shopping-agent-.git",
+        demo: "#"
+      }
+    }
   ];
 
   const containerVariants = {
@@ -334,8 +336,8 @@ export default function Home() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         type: "spring" as const,
@@ -389,7 +391,7 @@ export default function Home() {
           </>
         )}
       </AnimatePresence>
-      
+
       {/* Theme Toggle in Top Right */}
       <div className="fixed top-6 right-6 z-50">
         <ThemeToggle />
@@ -406,7 +408,7 @@ export default function Home() {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex w-full max-w-6xl flex-col items-start text-left px-4 sm:px-0 mx-auto"
           >
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -416,7 +418,7 @@ export default function Home() {
                 <motion.div
                   key={project.id}
                   variants={itemVariants}
-                  whileHover={{ 
+                  whileHover={{
                     y: -8,
                     transition: { type: "spring", stiffness: 300 }
                   }}
@@ -426,10 +428,10 @@ export default function Home() {
                   onClick={() => setSelectedProject(project)}
                 >
                   {/* Gradient Overlay */}
-                  <motion.div 
+                  <motion.div
                     className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
                   />
-                  
+
                   {/* Media Thumbnail */}
                   <div className="relative h-40 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900">
                     {project.mediaType === "video" ? (
@@ -443,9 +445,9 @@ export default function Home() {
                         ))}
                       </div>
                     )}
-                    
+
                     {/* Category Badge */}
-                    <motion.div 
+                    <motion.div
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm text-xs font-medium flex items-center gap-1"
@@ -455,7 +457,7 @@ export default function Home() {
                     </motion.div>
 
                     {/* Expand Icon */}
-                    <motion.div 
+                    <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: hoveredProject === project.id ? 1 : 0 }}
                       className="absolute top-3 right-3 p-2 rounded-full bg-black/50 backdrop-blur-sm text-white"
@@ -534,7 +536,7 @@ export default function Home() {
                   </div>
 
                   {/* Animated Border */}
-                  <motion.div 
+                  <motion.div
                     className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-100"
                     style={{ color: project.gradient.includes('purple') ? '#8b5cf6' : '#10b981' }}
                     initial={{ scaleX: 0 }}
@@ -666,7 +668,7 @@ export default function Home() {
                   link="https://m.facebook.com/story.php?story_fbid=pfbid05a2sLVZQEmyHfqwsS3FZoo4E9uifrVJBprHsWkXNyn8sN4KbXjxxBBzr53n7bQp5l&id=100064802406023&mibextid=CDWPTG"
                 >
                   <div className="space-y-2">
-                    <p>Managed social media communication and public relations</p> 
+                    <p>Managed social media communication and public relations</p>
                     <p>Promoted club events and community service projects</p>
                     <p>Designed digital promotional content</p>
                     <p>Coordinated communication between members and external partners</p>
@@ -674,18 +676,18 @@ export default function Home() {
                 </ExperienceItem>
 
                 <ExperienceItem
-  title="University Hackathons & Tech Events"
-  role="Participant & Organizer"
-  collapsible={true}
-  link="https://www.facebook.com/share/p/1aSPghpvuu/"
->
-  <div className="space-y-2">
-    <p>Participated in multiple university-level hackathons, collaborating in diverse teams to design, prototype, and deploy innovative software and hardware solutions under tight deadlines.</p>
-    <p>Organized and led tech workshops and events on topics like AI, Web3, and Full-Stack Development, enabling fellow students to learn hands-on skills and apply them in real projects.</p>
-    <p>Worked on creative projects including AI-powered apps, blockchain voting systems, and interactive web experiences, gaining practical exposure to Next.js, React, Solidity, Tailwind CSS, and other modern technologies.</p>
-    <p>Actively contributed to community knowledge sharing by writing technical tutorials, conducting demo sessions, and mentoring new participants in hackathons and coding competitions.</p>
-  </div>
-</ExperienceItem>
+                  title="University Hackathons & Tech Events"
+                  role="Participant & Organizer"
+                  collapsible={true}
+                  link="https://www.facebook.com/share/p/1aSPghpvuu/"
+                >
+                  <div className="space-y-2">
+                    <p>Participated in multiple university-level hackathons, collaborating in diverse teams to design, prototype, and deploy innovative software and hardware solutions under tight deadlines.</p>
+                    <p>Organized and led tech workshops and events on topics like AI, Web3, and Full-Stack Development, enabling fellow students to learn hands-on skills and apply them in real projects.</p>
+                    <p>Worked on creative projects including AI-powered apps, blockchain voting systems, and interactive web experiences, gaining practical exposure to Next.js, React, Solidity, Tailwind CSS, and other modern technologies.</p>
+                    <p>Actively contributed to community knowledge sharing by writing technical tutorials, conducting demo sessions, and mentoring new participants in hackathons and coding competitions.</p>
+                  </div>
+                </ExperienceItem>
               </div>
             </div>
 
@@ -783,11 +785,11 @@ export default function Home() {
 </div> */}
 
             <div className="mb-20 w-full">
-      
-     
 
-      {/* Modal */}
-      {/* <AnimatePresence>
+
+
+              {/* Modal */}
+              {/* <AnimatePresence>
         {selected && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6"
@@ -827,7 +829,7 @@ export default function Home() {
         )}
       </AnimatePresence> */}
 
-    </div>
+            </div>
 
             {/* Thing about me Section */}
             <div className="mb-16 w-full text-left">
@@ -836,69 +838,69 @@ export default function Home() {
               </h2>
               <div className="space-y-6">
                 <p className="w-full text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-Outside of technology, I enjoy being active and spending time with my team on the cricket field. 
-This photo captures one of my favorite moments — celebrating a tournament win with my teammates. 
-Cricket has taught me many valuable lessons about teamwork, discipline, and staying focused under pressure.
-</p>
+                  Outside of technology, I enjoy being active and spending time with my team on the cricket field.
+                  This photo captures one of my favorite moments — celebrating a tournament win with my teammates.
+                  Cricket has taught me many valuable lessons about teamwork, discipline, and staying focused under pressure.
+                </p>
 
-               {/* <div className="w-full overflow-hidden py-6"> */}
+                {/* <div className="w-full overflow-hidden py-6"> */}
 
 
-                 <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-      
-      <div className="flex w-max animate-infinite-scroll">
+                <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
 
-        {/* First Row */}
-        <div className="flex gap-12 py-6 pr-12">
-          {images.map((img, index) => (
-            <div
-              key={index}
-              className="relative h-[250px] w-[250px] grayscale hover:grayscale-0 transition-all duration-1600 sm:h-[320px] sm:w-[320px]"
-              style={{
-                maskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-                WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-              }}
-            >
-              <Image
-                src={img}
-                alt="Gallery image"
-                fill
-                className="object-contain object-center"
-              />
-            </div>
-          ))}
-        </div>
+                  <div className="flex w-max animate-infinite-scroll">
 
-        {/* Duplicate Row (for infinite loop) */}
-        <div className="flex gap-12 py-6 pr-12">
-          {images.map((img, index) => (
-            <div
-              key={index + images.length}
-              className="relative h-[250px] w-[250px] grayscale hover:grayscale-0 transition-all duration-1600 sm:h-[320px] sm:w-[320px]"
-              style={{
-                maskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-                WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-              }}
-            >
-              <Image
-                src={img}
-                alt="Gallery image"
-                fill
-                className="object-contain object-center"
-              />
-            </div>
-          ))}
-        </div>
+                    {/* First Row */}
+                    <div className="flex gap-12 py-6 pr-12">
+                      {images.map((img, index) => (
+                        <div
+                          key={index}
+                          className="relative h-[250px] w-[250px] grayscale hover:grayscale-0 transition-all duration-1600 sm:h-[320px] sm:w-[320px]"
+                          style={{
+                            maskImage: "radial-gradient(circle, black 40%, transparent 95%)",
+                            WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 95%)",
+                          }}
+                        >
+                          <Image
+                            src={img}
+                            alt="Gallery image"
+                            fill
+                            className="object-contain object-center"
+                          />
+                        </div>
+                      ))}
+                    </div>
 
-      </div>
-    </div>
-  
- 
+                    {/* Duplicate Row (for infinite loop) */}
+                    <div className="flex gap-12 py-6 pr-12">
+                      {images.map((img, index) => (
+                        <div
+                          key={index + images.length}
+                          className="relative h-[250px] w-[250px] grayscale hover:grayscale-0 transition-all duration-1600 sm:h-[320px] sm:w-[320px]"
+                          style={{
+                            maskImage: "radial-gradient(circle, black 40%, transparent 95%)",
+                            WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 95%)",
+                          }}
+                        >
+                          <Image
+                            src={img}
+                            alt="Gallery image"
+                            fill
+                            className="object-contain object-center"
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+                </div>
+
+
 
                 <p className="w-full text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-Just like in software development, success in sports comes from collaboration, strategy, and trust in the people around you. 
-Whether I'm building projects or playing a match, I always enjoy working together toward a shared goal and celebrating the results.
-</p>
+                  Just like in software development, success in sports comes from collaboration, strategy, and trust in the people around you.
+                  Whether I'm building projects or playing a match, I always enjoy working together toward a shared goal and celebrating the results.
+                </p>
               </div>
             </div>
 
@@ -944,9 +946,8 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
             title={`Switch to ${mode === "profile" ? "projects" : "profile"} `}
           >
             <div
-              className={`flex h-5 w-5 transform items-center justify-center rounded-full bg-white dark:bg-white shadow-sm transition duration-200 ease-in-out ${
-                mode === "projects" ? "translate-x-5" : "translate-x-0"
-              }`}
+              className={`flex h-5 w-5 transform items-center justify-center rounded-full bg-white dark:bg-white shadow-sm transition duration-200 ease-in-out ${mode === "projects" ? "translate-x-5" : "translate-x-0"
+                }`}
             >
               {mode === "profile" ? (
                 <User className="h-3 w-3 text-black" />
@@ -1008,7 +1009,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
 
       {/* QR Code Modal */}
       {showQR && (
-        
+
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-black/20 dark:bg-white/5 backdrop-blur-sm"
           onClick={() => setShowQR(false)}
@@ -1025,7 +1026,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
               <X className="h-4 w-4" />
             </button>
             <div className="rounded-lg bg-white p-2">
-              
+
               <QRCodeSVG
                 value="https://drive.google.com/file/d/1VcpkDS7aSSjpa6XS9ZADWbywQPhQhOk2/view?usp=sharing"
                 size={200}
@@ -1067,7 +1068,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
               <div className={`relative h-80 bg-gradient-to-br ${selectedProject.gradient}`}>
                 {selectedProject.mediaType === "video" ? (
                   <video
-                   key={selectedProject.mediaUrl}
+                    key={selectedProject.mediaUrl}
                     src={selectedProject.mediaUrl}
                     poster={selectedProject.thumbnail}
                     controls
@@ -1094,7 +1095,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
 
               {/* Details Section */}
               <div className="p-8">
-                <motion.h2 
+                <motion.h2
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   className="text-3xl font-bold mb-4 bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400 bg-clip-text text-transparent"
@@ -1102,7 +1103,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
                   {selectedProject.title}
                 </motion.h2>
 
-                <motion.p 
+                <motion.p
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.1 }}
@@ -1112,7 +1113,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
                 </motion.p>
 
                 {/* Tech Stack */}
-                <motion.div 
+                <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2 }}
@@ -1134,7 +1135,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
                 </motion.div>
 
                 {/* Stats */}
-                <motion.div 
+                <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3 }}
@@ -1149,7 +1150,7 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
                 </motion.div>
 
                 {/* Action Buttons */}
-                <motion.div 
+                <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4 }}
@@ -1187,6 +1188,8 @@ Whether I'm building projects or playing a match, I always enjoy working togethe
           </motion.div>
         )}
       </AnimatePresence>
+      {/* AI Chatbot */}
+      <PortfolioChatbot />
     </div>
   );
 }
