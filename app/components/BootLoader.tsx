@@ -42,8 +42,13 @@ export default function BootLoader({ onFinish }: { onFinish: () => void }) {
   const [input, setInput] = useState("");
   const [shake, setShake] = useState(false);
   const [exiting, setExiting] = useState(false);
+  const [timestamp, setTimestamp] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setTimestamp(new Date().toISOString().slice(0, 19) + "Z");
+  }, []);
 
   // auto-scroll
   useEffect(() => {
@@ -80,6 +85,7 @@ export default function BootLoader({ onFinish }: { onFinish: () => void }) {
     setPhase("hacking");
     let i = 0;
     const id = setInterval(() => {
+      if (i >= HACK_LINES.length) { clearInterval(id); return; }
       setHackLines((p) => [...p, HACK_LINES[i]]);
       i++;
       if (i === HACK_LINES.length) {
@@ -102,7 +108,7 @@ export default function BootLoader({ onFinish }: { onFinish: () => void }) {
       <div className="pointer-events-none absolute inset-0 z-10 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.06)_2px,rgba(0,0,0,0.06)_4px)]" />
       {/* corner decorations */}
       <div className="absolute top-4 left-4 text-green-900 text-[10px] select-none">NeuralHost v2.4.1</div>
-      <div className="absolute top-4 right-4 text-green-900 text-[10px] select-none tabular-nums">{new Date().toISOString().slice(0, 19)}Z</div>
+      <div className="absolute top-4 right-4 text-green-900 text-[10px] select-none tabular-nums">{timestamp}</div>
 
       <div className="flex-1 overflow-y-auto px-6 py-12 sm:px-16 sm:py-16 max-w-3xl mx-auto w-full">
 
@@ -186,7 +192,7 @@ export default function BootLoader({ onFinish }: { onFinish: () => void }) {
                   <p className="text-green-500 text-sm mb-3">
                     visitor@neuralhost:~$ CONFIRM
                   </p>
-                  {hackLines.map((line, i) => (
+                  {hackLines.filter(Boolean).map((line, i) => (
                     <motion.p
                       key={i}
                       initial={{ opacity: 0 }}
