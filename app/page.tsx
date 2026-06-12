@@ -403,13 +403,13 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="flex w-full max-w-6xl flex-col items-start text-left px-4 sm:px-0 mx-auto"
+            className="flex w-full max-w-5xl flex-col items-start text-left px-0 mx-auto"
           >
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full"
             >
               {projectss.map((project) => (
                 <motion.div
@@ -556,12 +556,12 @@ export default function Home() {
           >
 
             {/* ── HEADER ─────────────────────────────────────────── */}
-            <div className="mb-16 flex items-start gap-6">
+            <div className="mb-10 flex items-start gap-4">
               {/* Avatar */}
               <button
                 onClick={() => setShowEasterEgg(!showEasterEgg)}
                 aria-label="Toggle Aura Mode"
-                className="group relative h-[72px] w-[72px] flex-shrink-0 overflow-hidden rounded-full ring-1 ring-black/10 dark:ring-white/10 transition-all duration-300 active:scale-95 hover:ring-black/25 dark:hover:ring-white/25"
+                className="group relative h-[60px] w-[60px] sm:h-[72px] sm:w-[72px] flex-shrink-0 overflow-hidden rounded-full ring-1 ring-black/10 dark:ring-white/10 transition-all duration-300 active:scale-95 hover:ring-black/25 dark:hover:ring-white/25"
               >
                 <Image
                   src="/my.png"
@@ -573,20 +573,20 @@ export default function Home() {
               </button>
 
               {/* Name block */}
-              <div className="flex-1 pt-1">
-                <h1 className="text-[22px] font-semibold tracking-[-0.02em] text-black dark:text-white leading-tight">
+              <div className="flex-1 min-w-0 pt-1">
+                <h1 className="text-[17px] sm:text-[22px] font-semibold tracking-[-0.02em] text-black dark:text-white leading-tight truncate">
                   Damindu Abeygunasekara
                 </h1>
-                <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
-                  Full-Stack Developer · AI · Blockchain
+                <p className="mt-0.5 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                  Full-Stack · AI · Blockchain
                 </p>
-                <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400 dark:text-gray-500">
-                  <span className="flex items-center gap-1.5">
-                    <span className="relative flex h-1.5 w-1.5">
+                <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-gray-400 dark:text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 dark:bg-gray-500 opacity-60" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-gray-500" />
                     </span>
-                    Open to opportunities
+                    Open to work
                   </span>
                   <span className="text-gray-300 dark:text-gray-700">·</span>
                   <span className="font-mono tabular-nums">{time || "00:00:00"} IST</span>
@@ -613,7 +613,7 @@ export default function Home() {
             </div>
 
             {/* ── BIO ────────────────────────────────────────────── */}
-            <div className="mb-14 space-y-3 text-[15px] leading-relaxed text-gray-600 dark:text-gray-400">
+            <div className="mb-10 space-y-3 text-[14px] sm:text-[15px] leading-relaxed text-gray-600 dark:text-gray-400">
               <p>
                 CS undergraduate at the University of Kelaniya with a strong interest in
                 full-stack development, blockchain technologies, and artificial intelligence.
@@ -625,7 +625,7 @@ export default function Home() {
             </div>
 
             {/* ── NEURAL SIM ─────────────────────────────────────── */}
-            <div className="mb-14">
+            <div className="mb-10">
               <NeuralNetworkSim />
             </div>
 
@@ -633,8 +633,8 @@ export default function Home() {
             {/* Each section uses the same pattern below */}
 
             {/* ── EXPERIENCE ─────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Experience</p>
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Experience</p>
               <div className="divide-y divide-gray-100 dark:divide-zinc-800/80">
                 <ExperienceItem title="Ballerina Competition – Finalist" role="Member of team Axionic" collapsible={true} link="https://www.youtube.com/watch?v=hUZeVqmaUMY">
                   <div className="space-y-1.5 text-[14px]">
@@ -663,9 +663,9 @@ export default function Home() {
             </section>
 
             {/* ── IN BETWEEN ─────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">In Between</p>
-              <div className="rounded-xl border border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/30 px-6 py-5">
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">In Between</p>
+              <div className="rounded-xl border border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/30 px-4 py-4 sm:px-6 sm:py-5">
                 <ExperienceItem title="Beyond Academics & Technical Work" role="" collapsible={true}>
                   <div className="space-y-3 text-[14px]">
                     <p>Outside of my academic and technical work, I explore creative and collaborative activities — sports, video editing, photo editing, and organizing music and university events.</p>
@@ -677,27 +677,27 @@ export default function Home() {
             </section>
 
             {/* ── EDUCATION ──────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Education</p>
-              <div className="flex items-center justify-between py-3">
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Education</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-1">
                 <div>
-                  <p className="text-[15px] font-medium text-black dark:text-white">University of Kelaniya</p>
-                  <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">BSc Computer Science · Data Science</p>
+                  <p className="text-[14px] sm:text-[15px] font-medium text-black dark:text-white">University of Kelaniya</p>
+                  <p className="mt-0.5 text-[13px] text-gray-500 dark:text-gray-400">BSc Computer Science · Data Science</p>
                 </div>
-                <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">Undergraduate</span>
+                <span className="text-[11px] text-gray-400 dark:text-gray-500 flex-shrink-0">Undergraduate</span>
               </div>
               <div className="h-px bg-gray-100 dark:bg-zinc-800" />
             </section>
 
             {/* ── GITHUB ─────────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">GitHub Contributions</p>
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">GitHub Contributions</p>
               <GithubGraph />
             </section>
 
             {/* ── TECH STACK ─────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Tech Stack</p>
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Tech Stack</p>
               <p className="mb-6 text-[15px] text-gray-500 dark:text-gray-400">
                 Generalist at heart — here&apos;s the core stack I&apos;ve spent the most time with.
               </p>
@@ -705,7 +705,7 @@ export default function Home() {
             </section>
 
             {/* ── WRITINGS ───────────────────────────────────────── */}
-            <section className="mb-14">
+            <section className="mb-10 sm:mb-14">
               <div className="mb-5 flex items-baseline justify-between">
                 <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Writings</p>
                 <a href="https://medium.com/@adaminduprasadith" target="_blank" rel="noopener noreferrer"
@@ -730,40 +730,40 @@ export default function Home() {
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-4 py-3.5 transition-opacity hover:opacity-70"
+                    className="group flex items-start gap-3 py-3.5 transition-opacity hover:opacity-70"
                   >
-                    <span className="w-[72px] flex-shrink-0 text-[11px] text-gray-400 dark:text-gray-500">{article.date}</span>
-                    <span className="flex-1 text-[14px] text-black dark:text-white leading-snug">{article.title}</span>
-                    <span className="flex-shrink-0 text-[11px] text-gray-400 dark:text-gray-500 hidden sm:block">{article.tag}</span>
+                    <span className="w-[52px] sm:w-[72px] flex-shrink-0 text-[11px] text-gray-400 dark:text-gray-500 pt-[2px]">{article.date}</span>
+                    <span className="flex-1 min-w-0 text-[13px] sm:text-[14px] text-black dark:text-white leading-snug">{article.title}</span>
+                    <span className="flex-shrink-0 text-[11px] text-gray-400 dark:text-gray-500 hidden sm:block pt-[2px]">{article.tag}</span>
                   </a>
                 ))}
               </div>
             </section>
 
             {/* ── GALLERY ────────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">A Bit About Me</p>
-              <p className="mb-6 text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">A Bit About Me</p>
+              <p className="mb-5 text-[14px] sm:text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
                 Outside of technology I enjoy being active on the cricket field — teamwork, discipline,
                 staying focused under pressure. The same principles I bring to every build.
               </p>
               <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
                 <div className="flex w-max animate-infinite-scroll">
                   {[...images, ...images].map((img, i) => (
-                    <div key={i} className="relative mx-3 h-[160px] w-[160px] flex-shrink-0 overflow-hidden rounded-xl grayscale hover:grayscale-0 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/5">
+                    <div key={i} className="relative mx-2 h-[120px] w-[120px] sm:h-[160px] sm:w-[160px] flex-shrink-0 overflow-hidden rounded-xl grayscale hover:grayscale-0 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/5">
                       <Image src={img} alt="Gallery" fill className="object-cover" />
                     </div>
                   ))}
                 </div>
               </div>
-              <p className="mt-6 text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="mt-5 text-[14px] sm:text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
                 Whether building or playing — always chasing a shared goal with great people.
               </p>
             </section>
 
             {/* ── CONTACT ────────────────────────────────────────── */}
-            <section className="mb-14">
-              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Get in Touch</p>
+            <section className="mb-10 sm:mb-14">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Get in Touch</p>
               <div className="divide-y divide-gray-100 dark:divide-zinc-800/80">
                 {[
                   { label: "LinkedIn", sub: "damindu-abeygunasekara", href: "https://www.linkedin.com/in/damindu-abeygunasekara-8193b1282/" },
@@ -773,9 +773,9 @@ export default function Home() {
                   { label: "Medium", sub: "@adaminduprasadith", href: "https://medium.com/@adaminduprasadith" },
                 ].map((item) => (
                   <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-between py-3.5 transition-opacity hover:opacity-60">
-                    <span className="text-[14px] text-black dark:text-white">{item.label}</span>
-                    <span className="text-[13px] text-gray-400 dark:text-gray-500">{item.sub}</span>
+                    className="flex items-center justify-between gap-4 py-3.5 transition-opacity hover:opacity-60">
+                    <span className="text-[14px] text-black dark:text-white flex-shrink-0">{item.label}</span>
+                    <span className="text-[12px] sm:text-[13px] text-gray-400 dark:text-gray-500 truncate text-right">{item.sub}</span>
                   </a>
                 ))}
               </div>
@@ -883,7 +883,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -891,7 +891,7 @@ export default function Home() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 20 }}
-              className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-zinc-900 shadow-2xl"
+              className="relative w-full sm:max-w-4xl max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white dark:bg-zinc-900 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -905,7 +905,7 @@ export default function Home() {
               </motion.button>
 
               {/* Media Section */}
-              <div className={`relative h-80 bg-gradient-to-br ${selectedProject.gradient}`}>
+              <div className={`relative h-48 sm:h-80 bg-gradient-to-br ${selectedProject.gradient}`}>
                 {selectedProject.mediaType === "video" ? (
                   <video
                     key={selectedProject.mediaUrl}
@@ -934,7 +934,7 @@ export default function Home() {
               </div>
 
               {/* Details Section */}
-              <div className="p-8">
+              <div className="p-5 sm:p-8">
                 <motion.h2
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -979,7 +979,7 @@ export default function Home() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="grid grid-cols-3 gap-4 mb-6"
+                  className="grid grid-cols-3 gap-2 sm:gap-4 mb-6"
                 >
                   {Object.entries(selectedProject.stats).map(([key, value]) => (
                     <div key={key} className="text-center p-4 rounded-lg bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-800 dark:to-zinc-700">
