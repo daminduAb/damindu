@@ -275,14 +275,18 @@ export function PortfolioChatbot() {
                 {(!isOpen || isMinimized) && (
                     <motion.div
                         key="chat-button"
+                        drag
+                        dragMomentum={false}
+                        dragElastic={0}
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                         transition={{ type: "spring", damping: 18, stiffness: 260 }}
-                        className="fixed bottom-6 left-6 z-[100]"
+                        className="fixed bottom-6 left-6 z-[100] touch-none cursor-grab active:cursor-grabbing"
                     >
                         <motion.button
                             onClick={handleOpen}
+                            onPointerDown={(e) => e.stopPropagation()}
                             className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-black dark:bg-white text-white dark:text-black shadow-[0_4px_20px_rgba(0,0,0,0.25)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
                             whileHover={{ scale: 1.06 }}
                             whileTap={{ scale: 0.94 }}
@@ -310,21 +314,23 @@ export function PortfolioChatbot() {
                 {isOpen && (
                     <motion.div
                         key="chat-window"
+                        drag
+                        dragMomentum={false}
+                        dragElastic={0}
                         initial={{ opacity: 0, y: 40, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 40, scale: 0.9 }}
                         transition={{ type: "spring", damping: 22, stiffness: 200 }}
-                        className="fixed bottom-[4.5rem] left-6 z-[100] w-[360px] flex flex-col rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-white/90 dark:bg-zinc-900/95 shadow-[0_8px_40px_rgba(0,0,0,0.18)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden"
+                        className="fixed bottom-[4.5rem] left-4 right-4 sm:left-6 sm:right-auto sm:w-[360px] z-[100] flex flex-col rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-white/90 dark:bg-zinc-900/95 shadow-[0_8px_40px_rgba(0,0,0,0.18)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden touch-none"
                         style={{
                             maxWidth: "calc(100vw - 2rem)",
-                            // Animate height between minimized and full
                             maxHeight: isMinimized ? "64px" : "400px",
                             transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1)",
                         }}
                     >
-                        {/* Header — always visible, holds minimize + close */}
+                        {/* Header — drag handle + minimize + close */}
                         <div
-                            className="flex flex-shrink-0 items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 cursor-pointer select-none"
+                            className="flex flex-shrink-0 items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 cursor-grab active:cursor-grabbing select-none"
                             onClick={() => isMinimized && handleOpen()}
                         >
                             <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-black dark:bg-white flex-shrink-0">
@@ -359,6 +365,7 @@ export function PortfolioChatbot() {
                             <motion.button
                                 whileHover={{ scale: 1.15 }}
                                 whileTap={{ scale: 0.9 }}
+                                onPointerDown={(e) => e.stopPropagation()}
                                 onClick={isMinimized ? handleOpen : handleMinimize}
                                 className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors z-10"
                                 aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
@@ -370,6 +377,7 @@ export function PortfolioChatbot() {
                             <motion.button
                                 whileHover={{ scale: 1.15, rotate: 90 }}
                                 whileTap={{ scale: 0.9 }}
+                                onPointerDown={(e) => e.stopPropagation()}
                                 onClick={handleClose}
                                 className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors z-10"
                                 aria-label="Close chat"
