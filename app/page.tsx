@@ -20,7 +20,6 @@ import Image from "next/image";
 import {
   Github,
   Linkedin,
-  Youtube,
   User,
   QrCode,
   X,
@@ -36,7 +35,6 @@ import { TechStack } from "./components/TechStack";
 import { NeuralNetworkSim } from "./components/NeuralNetworkSim";
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useTheme } from "next-themes";
 
 import { QRCodeSVG } from "qrcode.react";
 
@@ -45,6 +43,7 @@ import { ThemeToggle } from "./components/ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { PortfolioChatbot } from "./components/PortfolioChatbot";
+import BootLoader from "./components/BootLoader";
 
 import {
   FiGithub,
@@ -72,7 +71,6 @@ import {
 
 
 } from "react-icons/si";
-import { h1 } from "framer-motion/client";
 
 // Define types
 interface Project {
@@ -103,12 +101,12 @@ const DiscordIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function Home() {
+  const [booted, setBooted] = useState(false);
   const [time, setTime] = useState<string>("");
   const [showQR, setShowQR] = useState(false);
   const [mode, setMode] = useState<"profile" | "projects">("profile");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const { setTheme, resolvedTheme } = useTheme();
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const [isLofiPlaying, setIsLofiPlaying] = useState(false);
   const [lofiVolume, setLofiVolume] = useState(1);
@@ -350,7 +348,9 @@ export default function Home() {
   };
 
   return (
-    <div className={`relative flex min-h-screen flex-col items-center bg-white dark:bg-black px-3 pt-16 text-black dark:text-white selection:bg-black dark:selection:bg-white selection:text-white dark:selection:text-black pb-32 sm:px-4 sm:pt-24 sm:pb-40 overflow-x-hidden transition-colors duration-300`}>
+    <>
+    {!booted && <BootLoader onFinish={() => setBooted(true)} />}
+    <div className={`relative flex min-h-screen flex-col items-center bg-white dark:bg-black px-5 pt-16 text-black dark:text-white selection:bg-black dark:selection:bg-white selection:text-white dark:selection:text-black pb-36 sm:px-8 sm:pt-24 overflow-x-hidden transition-colors duration-300 ${!booted ? "invisible" : ""}`}>
       {/* Easter Egg Effects */}
       <AnimatePresence>
         {showEasterEgg && (
@@ -393,11 +393,6 @@ export default function Home() {
           </>
         )}
       </AnimatePresence>
-
-      {/* Theme Toggle in Top Right */}
-      <div className="fixed top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
 
       <AnimatePresence mode="wait">
         {mode === "projects" ? (
@@ -550,78 +545,65 @@ export default function Home() {
             </motion.div>
           </motion.main>
         ) : (
-          /* Human Mode - Original View */
+          /* Profile — macOS style */
           <motion.main
             key="profile"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="flex w-full max-w-2xl flex-col items-center text-center"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="w-full max-w-[680px] mx-auto"
           >
-            {/* Profile Image - Easter Egg Trigger */}
-            <button
-              onClick={() => setShowEasterEgg(!showEasterEgg)}
-              className="group relative mb-2 h-40 w-40 grayscale filter sm:h-56 sm:w-56 overflow-hidden cursor-pointer transition-all duration-500 hover:grayscale-0 active:scale-95"
-              aria-label="Toggle Aura Mode"
-            >
-              <Image
-                src="/my.png"
-                alt="Profile"
-                fill
-                className={`object-contain transition-all duration-700 ${showEasterEgg ? 'grayscale-0 scale-105' : 'grayscale'}`}
-                priority
-              />
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white via-white/60 to-transparent dark:from-black dark:via-black/60 backdrop-blur-[1px]" />
 
-              {/* Subtle Glow on Hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_20px_rgba(59,130,246,0.3)] rounded-full pointer-events-none" />
-            </button>
+            {/* ── HEADER ─────────────────────────────────────────── */}
+            <div className="mb-16 flex items-start gap-6">
+              {/* Avatar */}
+              <button
+                onClick={() => setShowEasterEgg(!showEasterEgg)}
+                aria-label="Toggle Aura Mode"
+                className="group relative h-[72px] w-[72px] flex-shrink-0 overflow-hidden rounded-full ring-1 ring-black/10 dark:ring-white/10 transition-all duration-300 active:scale-95 hover:ring-black/25 dark:hover:ring-white/25"
+              >
+                <Image
+                  src="/my.png"
+                  alt="Damindu"
+                  fill
+                  className={`object-cover transition-all duration-500 ${showEasterEgg ? "grayscale-0" : "grayscale"} group-hover:grayscale-0`}
+                  priority
+                />
+              </button>
 
-            {/* Hero Text */}
-            <h1 className="mb-4 text-5xl font-bold tracking-tight sm:text-7xl">
-              Damindu Abeygunasekara
-            </h1>
-
-            {/* Phonetic Pronunciation */}
-            <div className="mb-8 flex flex-wrap items-center justify-center gap-2 text-xs text-gray-400 dark:text-gray-500 sm:text-sm">
-              <span>/dæmɪnduː əbeɪɡunəsɛkərə/</span>
-              <span className="text-gray-300 dark:text-gray-700">•</span>
-              <span>noun</span>
-              <span className="text-gray-300 dark:text-gray-700">•</span>
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="tabular-nums text-xs sm:text-sm">{time || "00:00:00"}</span>
-                  <span className="text-[10px] uppercase tracking-wider sm:text-xs">IST</span>
-                </div>
-
-                <span className="text-gray-300 dark:text-gray-700">•</span>
-
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-tight text-gray-400">fav</span>
+              {/* Name block */}
+              <div className="flex-1 pt-1">
+                <h1 className="text-[22px] font-semibold tracking-[-0.02em] text-black dark:text-white leading-tight">
+                  Damindu Abeygunasekara
+                </h1>
+                <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
+                  Full-Stack Developer · AI · Blockchain
+                </p>
+                <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400 dark:text-gray-500">
+                  <span className="flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 dark:bg-gray-500 opacity-60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-gray-500" />
+                    </span>
+                    Open to opportunities
+                  </span>
+                  <span className="text-gray-300 dark:text-gray-700">·</span>
+                  <span className="font-mono tabular-nums">{time || "00:00:00"} IST</span>
+                  <span className="text-gray-300 dark:text-gray-700">·</span>
                   <button
                     onClick={toggleLofi}
-                    className="flex h-5 w-5 items-center justify-center rounded-full transition-all hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-400 hover:text-black dark:hover:text-white"
-                    aria-label={isLofiPlaying ? "Pause Lofi" : "Play Lofi"}
+                    className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors"
                   >
                     {isLofiPlaying ? <Pause size={10} fill="currentColor" /> : <Music size={10} />}
+                    <span>{isLofiPlaying ? "Lofi on" : "Lofi"}</span>
                   </button>
                   <AnimatePresence>
                     {isLofiPlaying && (
-                      <motion.div
-                        initial={{ width: 0, opacity: 0 }}
-                        animate={{ width: 40, opacity: 1 }}
-                        exit={{ width: 0, opacity: 0 }}
-                        className="flex h-5 items-center overflow-hidden"
-                      >
-                        <input
-                          type="range"
-                          min="0"
-                          max="1"
-                          step="0.01"
-                          value={lofiVolume}
+                      <motion.div initial={{ width: 0, opacity: 0 }} animate={{ width: 40, opacity: 1 }} exit={{ width: 0, opacity: 0 }} className="overflow-hidden">
+                        <input type="range" min="0" max="1" step="0.01" value={lofiVolume}
                           onChange={(e) => setLofiVolume(parseFloat(e.target.value))}
-                          className="h-[2px] w-8 cursor-pointer appearance-none rounded-full bg-gray-200 dark:bg-zinc-800 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-400 dark:[&::-webkit-slider-thumb]:bg-zinc-500 hover:[&::-webkit-slider-thumb]:bg-black dark:hover:[&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:h-2 [&::-moz-range-thumb]:w-2 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-gray-400 dark:[&::-moz-range-thumb]:bg-zinc-500 hover:[&::-moz-range-thumb]:bg-black dark:hover:[&::-moz-range-thumb]:bg-white transition-all"
+                          className="h-[2px] w-9 cursor-pointer appearance-none rounded-full bg-gray-200 dark:bg-zinc-700 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-500 dark:[&::-webkit-slider-thumb]:bg-gray-400"
                         />
                       </motion.div>
                     )}
@@ -630,481 +612,239 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="w-full space-y-4 text-left text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg md:text-xl">
+            {/* ── BIO ────────────────────────────────────────────── */}
+            <div className="mb-14 space-y-3 text-[15px] leading-relaxed text-gray-600 dark:text-gray-400">
               <p>
-                I am a Computer Science undergraduate at the University of Kelaniya with a strong interest in
+                CS undergraduate at the University of Kelaniya with a strong interest in
                 full-stack development, blockchain technologies, and artificial intelligence.
               </p>
               <p>
-                I enjoy building real-world software solutions such as decentralized applications,
-                AI systems, and modern web platforms. My goal is to become a skilled software engineer
-                and contribute to innovative technology projects.
+                I build real-world software — decentralized apps, AI systems, and modern web platforms —
+                with a focus on shipping things that actually work.
               </p>
             </div>
 
-            <NeuralNetworkSim />
+            {/* ── NEURAL SIM ─────────────────────────────────────── */}
+            <div className="mb-14">
+              <NeuralNetworkSim />
+            </div>
 
-            {/* Experience Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                Experience
-              </h2>
-              <div className="space-y-12">
-                <ExperienceItem
-                  title="Ballerina Competition – Finalist"
-                  role="Member of team Axionic"
-                  collapsible={true}
-                  link="https://www.youtube.com/watch?v=hUZeVqmaUMY"
-                >
-                  <div className="space-y-2">
+            {/* ── DIVIDER UTIL ───────────────────────────────────── */}
+            {/* Each section uses the same pattern below */}
+
+            {/* ── EXPERIENCE ─────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Experience</p>
+              <div className="divide-y divide-gray-100 dark:divide-zinc-800/80">
+                <ExperienceItem title="Ballerina Competition – Finalist" role="Member of team Axionic" collapsible={true} link="https://www.youtube.com/watch?v=hUZeVqmaUMY">
+                  <div className="space-y-1.5 text-[14px]">
                     <p>Participated in a national-level ballerina competition</p>
                     <p>Selected as a finalist among many competitors</p>
                     <p>Demonstrated dedication, creativity, and performance skills</p>
                   </div>
                 </ExperienceItem>
-
-                <ExperienceItem
-                  title="Rotaract Club of University of Kelaniya"
-                  role="PR Coordinator"
-                  collapsible={true}
-                  link="https://m.facebook.com/story.php?story_fbid=pfbid05a2sLVZQEmyHfqwsS3FZoo4E9uifrVJBprHsWkXNyn8sN4KbXjxxBBzr53n7bQp5l&id=100064802406023&mibextid=CDWPTG"
-                >
-                  <div className="space-y-2">
+                <ExperienceItem title="Rotaract Club of University of Kelaniya" role="PR Coordinator" collapsible={true} link="https://m.facebook.com/story.php?story_fbid=pfbid05a2sLVZQEmyHfqwsS3FZoo4E9uifrVJBprHsWkXNyn8sN4KbXjxxBBzr53n7bQp5l&id=100064802406023&mibextid=CDWPTG">
+                  <div className="space-y-1.5 text-[14px]">
                     <p>Managed social media communication and public relations</p>
                     <p>Promoted club events and community service projects</p>
                     <p>Designed digital promotional content</p>
                     <p>Coordinated communication between members and external partners</p>
                   </div>
                 </ExperienceItem>
-
-                <ExperienceItem
-                  title="University Hackathons & Tech Events"
-                  role="Participant & Organizer"
-                  collapsible={true}
-                  link="https://www.facebook.com/share/p/1aSPghpvuu/"
-                >
-                  <div className="space-y-2">
-                    <p>Participated in multiple university-level hackathons, collaborating in diverse teams to design, prototype, and deploy innovative software and hardware solutions under tight deadlines.</p>
-                    <p>Organized and led tech workshops and events on topics like AI, Web3, and Full-Stack Development, enabling fellow students to learn hands-on skills and apply them in real projects.</p>
-                    <p>Worked on creative projects including AI-powered apps, blockchain voting systems, and interactive web experiences, gaining practical exposure to Next.js, React, Solidity, Tailwind CSS, and other modern technologies.</p>
-                    <p>Actively contributed to community knowledge sharing by writing technical tutorials, conducting demo sessions, and mentoring new participants in hackathons and coding competitions.</p>
+                <ExperienceItem title="University Hackathons & Tech Events" role="Participant & Organizer" collapsible={true} link="https://www.facebook.com/share/p/1aSPghpvuu/">
+                  <div className="space-y-1.5 text-[14px]">
+                    <p>Participated in multiple university-level hackathons, collaborating in diverse teams to design, prototype, and deploy innovative solutions under tight deadlines.</p>
+                    <p>Organized and led tech workshops on AI, Web3, and Full-Stack Development.</p>
+                    <p>Worked on AI-powered apps, blockchain voting systems, and interactive web experiences using Next.js, React, Solidity, and Tailwind CSS.</p>
+                    <p>Contributed to community knowledge sharing through technical tutorials, demo sessions, and mentoring.</p>
                   </div>
                 </ExperienceItem>
               </div>
-            </div>
+            </section>
 
-            {/* In Between These Experiences Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                In Between These Experiences
-              </h2>
-              <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8">
-                <ExperienceItem
-                  title="Beyond Academics & Technical Work"
-                  role=""
-                  collapsible={true}
-                >
-                  <div className="space-y-4">
-                    <p>
-                      Outside of my academic and technical work, I enjoy exploring creative and collaborative activities that help me develop new perspectives and skills. Being involved in different areas allows me to stay balanced, creative, and connected with people.
-                    </p>
-
-                    <p>
-                      I actively participate in <span className="font-medium">sports</span>, which helps me maintain discipline, teamwork, and a competitive mindset. Sports have always been an important part of my lifestyle and help me stay energetic and focused.
-                    </p>
-
-                    <p>
-                      I also enjoy <span className="font-medium">video editing and photo editing</span>, where I experiment with visual storytelling, creative design, and digital media production. These skills allow me to create engaging content for events, social media, and personal projects.
-                    </p>
-
-                    <p>
-                      Organizing <span className="font-medium">music events and university events</span> has been another meaningful experience. Working with teams to plan and manage events has helped me develop strong communication, leadership, and coordination skills.
-                    </p>
-
-                    <p>
-                      These experiences outside the classroom have shaped my ability to work with diverse teams, manage responsibilities, and approach challenges with creativity and adaptability.
-                    </p>
-
-                    <p className="font-medium text-black">
-                      I believe that combining technical knowledge with creativity and teamwork leads to building better ideas, stronger communities, and more meaningful projects.
-                    </p>
+            {/* ── IN BETWEEN ─────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">In Between</p>
+              <div className="rounded-xl border border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/30 px-6 py-5">
+                <ExperienceItem title="Beyond Academics & Technical Work" role="" collapsible={true}>
+                  <div className="space-y-3 text-[14px]">
+                    <p>Outside of my academic and technical work, I explore creative and collaborative activities — sports, video editing, photo editing, and organizing music and university events.</p>
+                    <p>These experiences have shaped my ability to work with diverse teams, manage responsibilities, and approach challenges with creativity and adaptability.</p>
+                    <p className="font-medium text-black dark:text-white">Combining technical knowledge with creativity and teamwork leads to building better ideas and more meaningful projects.</p>
                   </div>
                 </ExperienceItem>
               </div>
-            </div>
+            </section>
 
-            {/* Education Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                Education
-              </h2>
-              <div className="space-y-12">
-                <ExperienceItem
-                  title="University of Kelaniya"
-                  role="Bachelor of Science (BSc) in Computer Science (UG)"
-                >
-                  <p>Data Science</p>
-                </ExperienceItem>
+            {/* ── EDUCATION ──────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Education</p>
+              <div className="flex items-center justify-between py-3">
+                <div>
+                  <p className="text-[15px] font-medium text-black dark:text-white">University of Kelaniya</p>
+                  <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">BSc Computer Science · Data Science</p>
+                </div>
+                <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0">Undergraduate</span>
               </div>
-            </div>
+              <div className="h-px bg-gray-100 dark:bg-zinc-800" />
+            </section>
 
-            {/* GitHub Contributions Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                GitHub Contributions
-              </h2>
+            {/* ── GITHUB ─────────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">GitHub Contributions</p>
               <GithubGraph />
-            </div>
+            </section>
 
-            {/* Tech Stack Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                Tech Stack
-              </h2>
-              <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
-                I&apos;m a generalist at heart who can build with anything, but here&apos;s the core stack I&apos;ve spent the most time with:
+            {/* ── TECH STACK ─────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Tech Stack</p>
+              <p className="mb-6 text-[15px] text-gray-500 dark:text-gray-400">
+                Generalist at heart — here&apos;s the core stack I&apos;ve spent the most time with.
               </p>
               <TechStack />
-            </div>
+            </section>
 
-            {/* Writings & Blogs Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-2 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                Writings
-              </h2>
-              <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
-                I write about full-stack development, AI, blockchain, and things I learn along the way on{" "}
-                <a
-                  href="https://medium.com/@adaminduprasadith"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black dark:text-white underline underline-offset-4 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                >
-                  Medium
+            {/* ── WRITINGS ───────────────────────────────────────── */}
+            <section className="mb-14">
+              <div className="mb-5 flex items-baseline justify-between">
+                <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Writings</p>
+                <a href="https://medium.com/@adaminduprasadith" target="_blank" rel="noopener noreferrer"
+                  className="text-[11px] text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors">
+                  Medium →
                 </a>
-                .
-              </p>
-              <div className="grid gap-4 sm:grid-cols-2">
+              </div>
+              <div className="divide-y divide-gray-100 dark:divide-zinc-800/80">
                 {[
-                  {
-                    title: "Fine-tuning vs RAG: Stop Guessing, Start Choosing Wisely",
-                    tag: "AI / LLM",
-                    date: "Jun 2025",
-                    url: "https://medium.com/@adaminduprasadith/fine-tuning-vs-rag-stop-guessing-start-choosing-wisely-b593678643fe",
-                  },
-                  {
-                    title: "Attention Is All You Need — But Do You Actually Understand It?",
-                    tag: "AI / LLM",
-                    date: "Jun 2025",
-                    url: "https://medium.com/@adaminduprasadith/attention-is-all-you-need-but-do-you-actually-understand-it-587ab5202b5d",
-                  },
-                  {
-                    title: "Learn SOLID Principles in 2 Hours — Complete Beginner Guide with Python Examples",
-                    tag: "Python",
-                    date: "May 2025",
-                    url: "https://medium.com/@adaminduprasadith/learn-solid-principles-in-2-hours-complete-beginner-guide-with-python-examples-1a5ae787e7f0",
-                  },
-                  {
-                    title: "What even is a machine learning model?",
-                    tag: "ML",
-                    date: "May 2025",
-                    url: "https://medium.com/@adaminduprasadith/what-even-is-a-machine-learning-model-e2d410e32a5e",
-                  },
-                  {
-                    title: "Build Full-Stack Web Apps with the MERN Stack",
-                    tag: "Web Dev",
-                    date: "Apr 2025",
-                    url: "https://medium.com/@adaminduprasadith/build-full-stack-web-apps-with-the-mern-stack-5f6c20d4866f",
-                  },
-                  {
-                    title: "Monorepo in GitHub",
-                    tag: "DevOps",
-                    date: "Apr 2025",
-                    url: "https://medium.com/@adaminduprasadith/monorepo-in-github-e18ccddb83d8",
-                  },
-                  {
-                    title: "Jenkins Made Simple: A Beginner-Friendly Guide for Developers",
-                    tag: "DevOps",
-                    date: "Apr 2025",
-                    url: "https://medium.com/@adaminduprasadith/jenkins-made-simple-a-beginner-friendly-guide-for-developers-9807a6bf869b",
-                  },
-                  {
-                    title: "FastAPI: Build Lightning-Fast APIs with Minimal Code",
-                    tag: "Python",
-                    date: "Apr 2025",
-                    url: "https://medium.com/@adaminduprasadith/fastapi-build-lightning-fast-apis-with-minimal-code-84dff1f6ca2f",
-                  },
-                  {
-                    title: "Microservices Made Simple: A Beginner-Friendly Guide",
-                    tag: "Architecture",
-                    date: "Apr 2025",
-                    url: "https://medium.com/@adaminduprasadith/microservices-made-simple-a-beginner-friendly-guide-64300d1f042e",
-                  },
+                  { title: "Fine-tuning vs RAG: Stop Guessing, Start Choosing Wisely", tag: "AI / LLM", date: "Jun 2025", url: "https://medium.com/@adaminduprasadith/fine-tuning-vs-rag-stop-guessing-start-choosing-wisely-b593678643fe" },
+                  { title: "Attention Is All You Need — But Do You Actually Understand It?", tag: "AI / LLM", date: "Jun 2025", url: "https://medium.com/@adaminduprasadith/attention-is-all-you-need-but-do-you-actually-understand-it-587ab5202b5d" },
+                  { title: "Learn SOLID Principles in 2 Hours — Complete Beginner Guide with Python Examples", tag: "Python", date: "May 2025", url: "https://medium.com/@adaminduprasadith/learn-solid-principles-in-2-hours-complete-beginner-guide-with-python-examples-1a5ae787e7f0" },
+                  { title: "What even is a machine learning model?", tag: "ML", date: "May 2025", url: "https://medium.com/@adaminduprasadith/what-even-is-a-machine-learning-model-e2d410e32a5e" },
+                  { title: "Build Full-Stack Web Apps with the MERN Stack", tag: "Web Dev", date: "Apr 2025", url: "https://medium.com/@adaminduprasadith/build-full-stack-web-apps-with-the-mern-stack-5f6c20d4866f" },
+                  { title: "Monorepo in GitHub", tag: "DevOps", date: "Apr 2025", url: "https://medium.com/@adaminduprasadith/monorepo-in-github-e18ccddb83d8" },
+                  { title: "Jenkins Made Simple: A Beginner-Friendly Guide for Developers", tag: "DevOps", date: "Apr 2025", url: "https://medium.com/@adaminduprasadith/jenkins-made-simple-a-beginner-friendly-guide-for-developers-9807a6bf869b" },
+                  { title: "FastAPI: Build Lightning-Fast APIs with Minimal Code", tag: "Python", date: "Apr 2025", url: "https://medium.com/@adaminduprasadith/fastapi-build-lightning-fast-apis-with-minimal-code-84dff1f6ca2f" },
+                  { title: "Microservices Made Simple: A Beginner-Friendly Guide", tag: "Architecture", date: "Apr 2025", url: "https://medium.com/@adaminduprasadith/microservices-made-simple-a-beginner-friendly-guide-64300d1f042e" },
                 ].map((article) => (
-                  <motion.a
-                    key={article.title}
+                  <a
+                    key={article.url}
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -3 }}
-                    className="group flex flex-col gap-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5 transition-colors hover:border-gray-300 dark:hover:border-zinc-700"
+                    className="group flex items-center gap-4 py-3.5 transition-opacity hover:opacity-70"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="rounded-full border border-gray-200 dark:border-zinc-700 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                        {article.tag}
-                      </span>
-                      <span className="text-[11px] text-gray-400 dark:text-gray-500">{article.date}</span>
-                    </div>
-                    <p className="text-sm font-medium leading-snug text-gray-800 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors">
-                      {article.title}
-                    </p>
-                    <div className="flex items-center justify-end mt-auto">
-                      <span className="text-[11px] text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors flex items-center gap-1">
-                        Read on Medium
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </span>
-                    </div>
-                  </motion.a>
+                    <span className="w-[72px] flex-shrink-0 text-[11px] text-gray-400 dark:text-gray-500">{article.date}</span>
+                    <span className="flex-1 text-[14px] text-black dark:text-white leading-snug">{article.title}</span>
+                    <span className="flex-shrink-0 text-[11px] text-gray-400 dark:text-gray-500 hidden sm:block">{article.tag}</span>
+                  </a>
                 ))}
               </div>
-              <div className="mt-6 text-center">
-                <a
-                  href="https://medium.com/@adaminduprasadith"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors underline underline-offset-4"
-                >
-                  View all articles on Medium
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+            </section>
 
-            <div className="mb-20 w-full">
-
-
-
-              {/* Modal */}
-              {/* <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
-          >
-
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 120 }}
-              className="max-w-3xl rounded-2xl bg-white dark:bg-black p-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              
-              <img
-                src={selected.image}
-                alt={selected.title}
-                className="rounded-xl w-full"
-              />
-
-              <div className="mt-4">
-                <h3 className="text-lg font-bold text-black dark:text-white">
-                  {selected.title}
-                </h3>
-                <p className="text-sm text-gray-500">
-                  Issued by {selected.issuer}
-                </p>
-              </div>
-
-            </motion.div>
-
-          </motion.div>
-        )}
-      </AnimatePresence> */}
-
-            </div>
-
-            {/* Thing about me Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                Thing about me
-              </h2>
-              <div className="space-y-6">
-                <p className="w-full text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-                  Outside of technology, I enjoy being active and spending time with my team on the cricket field.
-                  This photo captures one of my favorite moments — celebrating a tournament win with my teammates.
-                  Cricket has taught me many valuable lessons about teamwork, discipline, and staying focused under pressure.
-                </p>
-
-                {/* <div className="w-full overflow-hidden py-6"> */}
-
-
-                <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-
-                  <div className="flex w-max animate-infinite-scroll">
-
-                    {/* First Row */}
-                    <div className="flex gap-12 py-6 pr-12">
-                      {images.map((img, index) => (
-                        <div
-                          key={index}
-                          className="relative h-[250px] w-[250px] grayscale hover:grayscale-0 transition-all duration-1600 sm:h-[320px] sm:w-[320px]"
-                          style={{
-                            maskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-                            WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-                          }}
-                        >
-                          <Image
-                            src={img}
-                            alt="Gallery image"
-                            fill
-                            className="object-contain object-center"
-                          />
-                        </div>
-                      ))}
+            {/* ── GALLERY ────────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">A Bit About Me</p>
+              <p className="mb-6 text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
+                Outside of technology I enjoy being active on the cricket field — teamwork, discipline,
+                staying focused under pressure. The same principles I bring to every build.
+              </p>
+              <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+                <div className="flex w-max animate-infinite-scroll">
+                  {[...images, ...images].map((img, i) => (
+                    <div key={i} className="relative mx-3 h-[160px] w-[160px] flex-shrink-0 overflow-hidden rounded-xl grayscale hover:grayscale-0 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/5">
+                      <Image src={img} alt="Gallery" fill className="object-cover" />
                     </div>
-
-                    {/* Duplicate Row (for infinite loop) */}
-                    <div className="flex gap-12 py-6 pr-12">
-                      {images.map((img, index) => (
-                        <div
-                          key={index + images.length}
-                          className="relative h-[250px] w-[250px] grayscale hover:grayscale-0 transition-all duration-1600 sm:h-[320px] sm:w-[320px]"
-                          style={{
-                            maskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-                            WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 95%)",
-                          }}
-                        >
-                          <Image
-                            src={img}
-                            alt="Gallery image"
-                            fill
-                            className="object-contain object-center"
-                          />
-                        </div>
-                      ))}
-                    </div>
-
-                  </div>
+                  ))}
                 </div>
-
-
-
-                <p className="w-full text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-                  Just like in software development, success in sports comes from collaboration, strategy, and trust in the people around you.
-                  Whether I'm building projects or playing a match, I always enjoy working together toward a shared goal and celebrating the results.
-                </p>
               </div>
-            </div>
+              <p className="mt-6 text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
+                Whether building or playing — always chasing a shared goal with great people.
+              </p>
+            </section>
 
-            {/* Get in Touch Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
-                Get in Touch
-              </h2>
-              <div className="space-y-4">
-                <p className="text-lg text-gray-600 dark:text-gray-400">
-                  Connect with me on{" "}
-                  <a
-                    href="https://www.linkedin.com/in/damindu-abeygunasekara-8193b1282/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black dark:text-white underline underline-offset-4 hover:text-gray-600 dark:hover:text-gray-300"
-                  >
-                    LinkedIn
-                  </a>{" "}
-                  or{" "} shoot an {" "}
-                  <a
-                    href="mailto:daminduprasadith05@gmail.com"
-                    className="text-black dark:text-white underline underline-offset-4 hover:text-gray-600 dark:hover:text-gray-300"
-                  >
-                    email
+            {/* ── CONTACT ────────────────────────────────────────── */}
+            <section className="mb-14">
+              <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-gray-400 dark:text-gray-500">Get in Touch</p>
+              <div className="divide-y divide-gray-100 dark:divide-zinc-800/80">
+                {[
+                  { label: "LinkedIn", sub: "damindu-abeygunasekara", href: "https://www.linkedin.com/in/damindu-abeygunasekara-8193b1282/" },
+                  { label: "Email", sub: "daminduprasadith05@gmail.com", href: "mailto:daminduprasadith05@gmail.com" },
+                  { label: "GitHub", sub: "daminduAb", href: "https://github.com/daminduAb" },
+                  { label: "X / Twitter", sub: "@DaminduP2001", href: "https://x.com/DaminduP2001" },
+                  { label: "Medium", sub: "@adaminduprasadith", href: "https://medium.com/@adaminduprasadith" },
+                ].map((item) => (
+                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-between py-3.5 transition-opacity hover:opacity-60">
+                    <span className="text-[14px] text-black dark:text-white">{item.label}</span>
+                    <span className="text-[13px] text-gray-400 dark:text-gray-500">{item.sub}</span>
                   </a>
-                </p>
+                ))}
               </div>
-            </div>
+            </section>
+
           </motion.main>
         )}
       </AnimatePresence>
 
-      {/* Glass Island Navbar */}
-      <nav className="fixed bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-gray-200 dark:border-zinc-700 bg-white/70 dark:bg-zinc-900/80 px-4 py-3 shadow-sm backdrop-blur-md transition-all hover:bg-white/90 dark:hover:bg-zinc-900 sm:gap-6 sm:px-6">
-        {/* Mode Toggle Switch */}
-        <div className="flex items-center">
-          <button
-            onClick={() => setMode(mode === "profile" ? "projects" : "profile")}
-            className="group relative flex h-7 w-12 cursor-pointer rounded-full bg-gray-200 dark:bg-zinc-700 p-1 transition-colors duration-200 ease-in-out hover:bg-gray-300 dark:hover:bg-zinc-600 focus:outline-none"
-            role="switch"
-            aria-checked={mode === "profile"}
-            title={`Switch to ${mode === "profile" ? "projects" : "profile"} `}
-          >
-            <div
-              className={`flex h-5 w-5 transform items-center justify-center rounded-full bg-white dark:bg-white shadow-sm transition duration-200 ease-in-out ${mode === "projects" ? "translate-x-5" : "translate-x-0"
-                }`}
-            >
-              {mode === "profile" ? (
-                <User className="h-3 w-3 text-black" />
-              ) : (
-                <FiShoppingCart className="h-3 w-3 text-black" />
-              )}
-            </div>
-          </button>
-        </div>
+      {/* Navbar */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-white/80 dark:bg-zinc-900/85 px-3 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+
+        {/* Mode toggle */}
         <button
-          onClick={() => setShowQR(true)}
-          className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
-          aria-label="Show QR Code"
+          onClick={() => setMode(mode === "profile" ? "projects" : "profile")}
+          title={`Switch to ${mode === "profile" ? "projects" : "profile"}`}
+          className={`flex h-8 items-center gap-1.5 rounded-xl px-3 text-xs font-medium transition-all duration-200 ${
+            mode === "profile"
+              ? "bg-black dark:bg-white text-white dark:text-black"
+              : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
+          }`}
         >
-          <QrCode className="h-5 w-5" />
+          <User className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">Profile</span>
         </button>
-        <div className="h-6 w-px bg-gray-200 dark:bg-zinc-700" />
-        <a
-          href="https://github.com/daminduAb"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
+        <button
+          onClick={() => setMode(mode === "projects" ? "profile" : "projects")}
+          title="Projects"
+          className={`flex h-8 items-center gap-1.5 rounded-xl px-3 text-xs font-medium transition-all duration-200 ${
+            mode === "projects"
+              ? "bg-black dark:bg-white text-white dark:text-black"
+              : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
+          }`}
         >
-          <Github className="h-5 w-5" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/damindu-abeygunasekara-8193b1282/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
-        >
-          <Linkedin className="h-5 w-5" />
-        </a>
-        <a
-          href="https://x.com/DaminduP2001"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
-        >
-          <FaXTwitter className="h-5 w-5" />
-        </a>
-        {/* <a
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
-        >
-          <Youtube className="h-5 w-5" />
-        </a> */}
-        <a
-          href="https://discord.com/channels/@me/948819673997262879"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors hover:scale-110"
-        >
-          <DiscordIcon className="h-5 w-5" />
-        </a>
+          <FiShoppingCart className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">Projects</span>
+        </button>
+
+        <div className="mx-1 h-5 w-px bg-black/10 dark:bg-white/10" />
+
+        {/* Social icons */}
+        {[
+          { href: "https://github.com/daminduAb", icon: <Github className="h-4 w-4" />, label: "GitHub" },
+          { href: "https://www.linkedin.com/in/damindu-abeygunasekara-8193b1282/", icon: <Linkedin className="h-4 w-4" />, label: "LinkedIn" },
+          { href: "https://x.com/DaminduP2001", icon: <FaXTwitter className="h-4 w-4" />, label: "X" },
+          { href: "https://medium.com/@adaminduprasadith", icon: (
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+            </svg>
+          ), label: "Medium" },
+          { href: "https://discord.com/channels/@me/948819673997262879", icon: <DiscordIcon className="h-4 w-4" />, label: "Discord" },
+        ].map((item) => (
+          <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
+            title={item.label}
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">
+            {item.icon}
+          </a>
+        ))}
+
+        <div className="mx-1 h-5 w-px bg-black/10 dark:bg-white/10" />
+
+        {/* QR */}
+        <button onClick={() => setShowQR(true)} title="Resume QR"
+          className="flex h-8 w-8 items-center justify-center rounded-xl text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-150">
+          <QrCode className="h-4 w-4" />
+        </button>
+
+        {/* Theme toggle */}
+        <ThemeToggle />
       </nav>
 
       {/* QR Code Modal */}
@@ -1291,5 +1031,6 @@ export default function Home() {
       {/* AI Chatbot */}
       <PortfolioChatbot />
     </div>
+    </>
   );
 }

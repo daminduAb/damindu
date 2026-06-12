@@ -279,36 +279,27 @@ export function PortfolioChatbot() {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                         transition={{ type: "spring", damping: 18, stiffness: 260 }}
-                        className="fixed bottom-24 right-6 z-[100]"
+                        className="fixed bottom-6 left-6 z-[100]"
                     >
                         <motion.button
                             onClick={handleOpen}
-                            className="relative flex h-14 w-14 items-center justify-center rounded-full bg-black dark:bg-white text-white dark:text-black shadow-lg"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
+                            className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-black dark:bg-white text-white dark:text-black shadow-[0_4px_20px_rgba(0,0,0,0.25)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                            whileHover={{ scale: 1.06 }}
+                            whileTap={{ scale: 0.94 }}
                             aria-label="Open chat"
                         >
                             <ToneRipple trigger={ripple} />
-                            <MessageCircle className="h-6 w-6" />
-
-                            {/* Unread dot */}
+                            <MessageCircle className="h-5 w-5" />
                             <AnimatePresence>
                                 {hasUnread && (
                                     <motion.span
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         exit={{ scale: 0 }}
-                                        className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-blue-500 border-2 border-white dark:border-black"
+                                        className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-black dark:bg-white border-2 border-white dark:border-black"
                                     />
                                 )}
                             </AnimatePresence>
-
-                            {/* Idle pulse ring */}
-                            <motion.span
-                                className="absolute inset-0 rounded-full border-2 border-black dark:border-white"
-                                animate={{ scale: [1, 1.4], opacity: [0.4, 0] }}
-                                transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }}
-                            />
                         </motion.button>
                     </motion.div>
                 )}
@@ -323,7 +314,7 @@ export function PortfolioChatbot() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 40, scale: 0.9 }}
                         transition={{ type: "spring", damping: 22, stiffness: 200 }}
-                        className="fixed bottom-24 right-6 z-[100] w-[360px] flex flex-col rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden"
+                        className="fixed bottom-[4.5rem] left-6 z-[100] w-[360px] flex flex-col rounded-2xl border border-black/[0.06] dark:border-white/[0.08] bg-white/90 dark:bg-zinc-900/95 shadow-[0_8px_40px_rgba(0,0,0,0.18)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden"
                         style={{
                             maxWidth: "calc(100vw - 2rem)",
                             // Animate height between minimized and full
