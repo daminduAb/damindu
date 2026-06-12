@@ -768,23 +768,121 @@ export default function Home() {
             </div>
 
             {/* Writings & Blogs Section */}
-            {/* <div className="mb-16 w-full text-left">
-  <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-    Writings & Blogs
-  </h2>
-  <p className="w-full text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-    I share my thoughts, experiences, and learnings on{" "}
-    <a
-      href="https://medium.com/@adityapatil24680"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-black dark:text-white underline underline-offset-4 transition-colors hover:text-gray-600 dark:hover:text-gray-300"
-    >
-      Medium
-    </a>
-    . I prefer using an established platform rather than building a separate website so I can focus on what really matters: discussing technology, AI, full-stack development, and real-world project experiences.
-  </p>
-</div> */}
+            <div className="mb-16 w-full text-left">
+              <h2 className="mb-2 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                Writings
+              </h2>
+              <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
+                I write about full-stack development, AI, blockchain, and things I learn along the way on{" "}
+                <a
+                  href="https://medium.com/@adaminduprasadith"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-black dark:text-white underline underline-offset-4 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                >
+                  Medium
+                </a>
+                .
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  {
+                    title: "Fine-tuning vs RAG: Stop Guessing, Start Choosing Wisely",
+                    tag: "AI / LLM",
+                    date: "Jun 2025",
+                    url: "https://medium.com/@adaminduprasadith/fine-tuning-vs-rag-stop-guessing-start-choosing-wisely-b593678643fe",
+                  },
+                  {
+                    title: "Attention Is All You Need — But Do You Actually Understand It?",
+                    tag: "AI / LLM",
+                    date: "Jun 2025",
+                    url: "https://medium.com/@adaminduprasadith/attention-is-all-you-need-but-do-you-actually-understand-it-587ab5202b5d",
+                  },
+                  {
+                    title: "Learn SOLID Principles in 2 Hours — Complete Beginner Guide with Python Examples",
+                    tag: "Python",
+                    date: "May 2025",
+                    url: "https://medium.com/@adaminduprasadith/learn-solid-principles-in-2-hours-complete-beginner-guide-with-python-examples-1a5ae787e7f0",
+                  },
+                  {
+                    title: "What even is a machine learning model?",
+                    tag: "ML",
+                    date: "May 2025",
+                    url: "https://medium.com/@adaminduprasadith/what-even-is-a-machine-learning-model-e2d410e32a5e",
+                  },
+                  {
+                    title: "Build Full-Stack Web Apps with the MERN Stack",
+                    tag: "Web Dev",
+                    date: "Apr 2025",
+                    url: "https://medium.com/@adaminduprasadith/build-full-stack-web-apps-with-the-mern-stack-5f6c20d4866f",
+                  },
+                  {
+                    title: "Monorepo in GitHub",
+                    tag: "DevOps",
+                    date: "Apr 2025",
+                    url: "https://medium.com/@adaminduprasadith/monorepo-in-github-e18ccddb83d8",
+                  },
+                  {
+                    title: "Jenkins Made Simple: A Beginner-Friendly Guide for Developers",
+                    tag: "DevOps",
+                    date: "Apr 2025",
+                    url: "https://medium.com/@adaminduprasadith/jenkins-made-simple-a-beginner-friendly-guide-for-developers-9807a6bf869b",
+                  },
+                  {
+                    title: "FastAPI: Build Lightning-Fast APIs with Minimal Code",
+                    tag: "Python",
+                    date: "Apr 2025",
+                    url: "https://medium.com/@adaminduprasadith/fastapi-build-lightning-fast-apis-with-minimal-code-84dff1f6ca2f",
+                  },
+                  {
+                    title: "Microservices Made Simple: A Beginner-Friendly Guide",
+                    tag: "Architecture",
+                    date: "Apr 2025",
+                    url: "https://medium.com/@adaminduprasadith/microservices-made-simple-a-beginner-friendly-guide-64300d1f042e",
+                  },
+                ].map((article) => (
+                  <motion.a
+                    key={article.title}
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -3 }}
+                    className="group flex flex-col gap-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5 transition-colors hover:border-gray-300 dark:hover:border-zinc-700"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full border border-gray-200 dark:border-zinc-700 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                        {article.tag}
+                      </span>
+                      <span className="text-[11px] text-gray-400 dark:text-gray-500">{article.date}</span>
+                    </div>
+                    <p className="text-sm font-medium leading-snug text-gray-800 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                      {article.title}
+                    </p>
+                    <div className="flex items-center justify-end mt-auto">
+                      <span className="text-[11px] text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors flex items-center gap-1">
+                        Read on Medium
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+              <div className="mt-6 text-center">
+                <a
+                  href="https://medium.com/@adaminduprasadith"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors underline underline-offset-4"
+                >
+                  View all articles on Medium
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
             <div className="mb-20 w-full">
 
