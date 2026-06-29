@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://www.justaditya.com/sitemap.xml',
+        sitemap: 'https://damindu-two.vercel.app/sitemap.xml',
     }
 }
