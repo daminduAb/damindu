@@ -59,6 +59,7 @@ export default function BootLoader({ onFinish }: { onFinish: () => void }) {
   useEffect(() => {
     let i = 0;
     const id = setInterval(() => {
+      if (i >= BOOT_LINES.length) { clearInterval(id); return; }
       setBootLines((p) => [...p, BOOT_LINES[i]]);
       i++;
       if (i === BOOT_LINES.length) {
@@ -131,11 +132,11 @@ export default function BootLoader({ onFinish }: { onFinish: () => void }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.15 }}
               className={
-                line.includes("OK") ? "text-green-400" :
-                line.includes("Awaiting") ? "text-yellow-400 mt-4" : "text-green-600"
+                line?.includes("OK") ? "text-green-400" :
+                line?.includes("Awaiting") ? "text-yellow-400 mt-4" : "text-green-600"
               }
             >
-              {line.includes("OK")
+              {line?.includes("OK")
                 ? <><span className="text-green-600">[  </span><span className="text-green-300">OK</span><span className="text-green-600">  ] </span>{line.slice(9)}</>
                 : line
               }

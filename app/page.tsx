@@ -24,7 +24,8 @@ import {
   QrCode,
   X,
   Music,
-  Pause
+  Pause,
+  Car,
 } from "lucide-react";
 
 import { FaXTwitter } from "react-icons/fa6";
@@ -68,8 +69,13 @@ import {
   SiPython,
   SiFastapi,
   SiOpenai,
-
-
+  SiTypescript,
+  SiPostgresql,
+  SiDocker,
+  SiSpringboot,
+  SiPytorch,
+  SiFlask,
+  SiScikitlearn,
 } from "react-icons/si";
 
 // Define types
@@ -218,8 +224,8 @@ export default function Home() {
         Ethereum: <SiEthereum className="text-blue-600" />
       },
       category: "blockchain",
-      gradient: "",
-      icon: <FiShoppingCart className="w-6 h-6" />,
+      gradient: "from-blue-500/30 via-purple-500/20 to-indigo-600/30",
+      icon: <SiEthereum className="w-6 h-6 text-blue-500" />,
       mediaType: "video",
       mediaUrl: "voting-system-demo.mp4",
       thumbnail: "casual2.jpg",
@@ -246,8 +252,8 @@ export default function Home() {
         "Stripe": <SiStripe className="text-orange-500" />
       },
       category: "ecommerce",
-      gradient: "",
-      icon: <FiShoppingCart className="w-6 h-6" />,
+      gradient: "from-emerald-500/30 via-teal-400/20 to-green-600/30",
+      icon: <FiShoppingCart className="w-6 h-6 text-emerald-500" />,
       mediaType: "image",
       images: [
         "/1.png",
@@ -277,8 +283,8 @@ export default function Home() {
         "Mysql": <SiMysql className="text-blue-600" />
       },
       category: "sustainability",
-      gradient: "",
-      icon: <FiShoppingCart className="w-6 h-6" />,
+      gradient: "from-green-500/30 via-lime-400/20 to-emerald-600/30",
+      icon: <SiNodedotjs className="w-6 h-6 text-green-500" />,
       mediaType: "video",
       mediaUrl: "/ecogreen.mp4",
       thumbnail: "/casual2.jpg",
@@ -306,8 +312,8 @@ export default function Home() {
         "Groq AI": <SiOpenai className="text-purple-400" />
       },
       category: "ai",
-      gradient: "",
-      icon: <FiMessageCircle className="w-6 h-6" />,
+      gradient: "from-purple-500/30 via-violet-400/20 to-pink-600/30",
+      icon: <FiMessageCircle className="w-6 h-6 text-purple-500" />,
       mediaType: "video",
       mediaUrl: "/whatsapp-bot.mp4",
       thumbnail: "/whatsapp-thumb.jpg",
@@ -318,6 +324,64 @@ export default function Home() {
       },
       links: {
         github: "https://github.com/daminduAb/AI-WhatsApp-shopping-agent-.git",
+        demo: "#"
+      }
+    },
+    {
+      id: 5,
+      title: "Vahana.lk",
+      shortDesc: "AI-powered vehicle marketplace for Sri Lanka",
+      fullDesc: "A full-stack vehicle marketplace with AI photo-based car recognition powered by a custom EfficientNet-B0 model trained on 7 vehicle classes. Features location-based search with PostGIS, JWT-secured Spring Boot backend, and a clean Next.js 14 frontend. Achieves 74.4% top-1 and 97.6% top-5 accuracy.",
+      tech: ["Next.js", "Spring Boot", "FastAPI", "PyTorch", "PostgreSQL", "Docker"],
+      techIcons: {
+        "Next.js": <SiNextdotjs className="text-black dark:text-white" />,
+        "Spring Boot": <SiSpringboot className="text-green-500" />,
+        "FastAPI": <SiFastapi className="text-teal-400" />,
+        "PyTorch": <SiPytorch className="text-orange-500" />,
+        "PostgreSQL": <SiPostgresql className="text-blue-400" />,
+        "Docker": <SiDocker className="text-blue-500" />,
+      },
+      category: "ai / marketplace",
+      gradient: "from-orange-500/30 via-amber-400/20 to-red-500/30",
+      icon: <Car className="w-6 h-6 text-orange-500" />,
+      mediaType: "image",
+      images: [],
+      stats: {
+        "top-1 acc": "74.4%",
+        "top-5 acc": "97.6%",
+        "classes": "7",
+      },
+      links: {
+        github: "https://github.com/daminduAb/Vahana.lk.git",
+        demo: "#"
+      }
+    },
+    {
+      id: 6,
+      title: "HospitalQ",
+      shortDesc: "AI-powered hospital queue management system",
+      fullDesc: "A full-stack hospital queue management system with real-time patient tracking, role-based access for admins, doctors, and patients, and an ML-powered wait-time prediction engine built with Python, Flask, and scikit-learn. Features 13+ pages, priority scheduling, and live analytics dashboards with Chart.js.",
+      tech: ["Java", "MySQL", "Flask", "scikit-learn", "Python", "Chart.js"],
+      techIcons: {
+        "Java": <span className="font-bold text-red-500 text-xs">Java</span>,
+        "MySQL": <SiMysql className="text-blue-600" />,
+        "Flask": <SiFlask className="text-gray-600 dark:text-gray-300" />,
+        "scikit-learn": <SiScikitlearn className="text-orange-400" />,
+        "Python": <SiPython className="text-yellow-400" />,
+        "Chart.js": <span className="font-bold text-pink-400 text-xs">Chart</span>,
+      },
+      category: "healthcare / ai",
+      gradient: "from-red-500/30 via-rose-400/20 to-pink-500/30",
+      icon: <span className="font-bold text-red-500 text-sm">Java</span>,
+      mediaType: "image",
+      images: [],
+      stats: {
+        "User Roles": "3",
+        "Pages": "13+",
+        "ML Endpoints": "4",
+      },
+      links: {
+        github: "https://github.com/daminduAb/hospital.git",
         demo: "#"
       }
     }
@@ -409,7 +473,7 @@ export default function Home() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 w-full"
             >
               {projectss.map((project) => (
                 <motion.div
@@ -421,7 +485,7 @@ export default function Home() {
                   }}
                   onHoverStart={() => setHoveredProject(project.id)}
                   onHoverEnd={() => setHoveredProject(null)}
-                  className="group relative rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/50 backdrop-blur-sm overflow-hidden cursor-pointer"
+                  className="group relative rounded-2xl border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-500 bg-white dark:bg-zinc-900/70 backdrop-blur-sm overflow-hidden cursor-pointer shadow-sm hover:shadow-xl dark:hover:shadow-black/40 transition-shadow duration-300"
                   onClick={() => setSelectedProject(project)}
                 >
                   {/* Gradient Overlay */}
@@ -430,18 +494,20 @@ export default function Home() {
                   />
 
                   {/* Media Thumbnail */}
-                  <div className="relative h-40 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900">
-                    {project.mediaType === "video" ? (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <FiShoppingCart className="w-12 h-12 text-white drop-shadow-lg opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <div className={`relative h-44 bg-gradient-to-br ${project.gradient} dark:brightness-75`}>
+                    {/* large faded icon */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-[80px] opacity-10 group-hover:opacity-20 transition-opacity duration-500 scale-110">
+                        {project.icon}
                       </div>
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center gap-2">
-                        {project.images?.map((_, idx) => (
-                          <div key={idx} className="w-2 h-2 rounded-full bg-white/50" />
-                        ))}
+                    </div>
+                    {/* centered icon + label */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <span className="text-2xl">{project.icon}</span>
                       </div>
-                    )}
+                      <span className="text-[11px] font-medium text-black/50 dark:text-white/40 tracking-wider uppercase">{project.mediaType === "video" ? "Demo available" : project.images && project.images.length > 0 ? `${project.images.length} screenshots` : "In development"}</span>
+                    </div>
 
                     {/* Category Badge */}
                     <motion.div
